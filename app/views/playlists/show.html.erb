@@ -8,18 +8,18 @@
 <br>
 
 <%# deleting this playlist %>
-<%= button_to "Delete This Playlist", {:controller => :playlists,
-      :action => 'destroy', :id => @playlist.id }, :method => :delete %>
+    <%= button_to "Delete This Playlist", {:controller => :playlists,
+        :action => 'destroy', :id => @playlist.id }, :method => :delete, class:"btn btn-outline-light" %>
 <br>
 
 <%# editing this playlist %>
 <%= button_to "Edit This Playlist", {:controller => :playlists,
-      :action => 'edit', :id => @playlist.id }, :method => :get %>
+      :action => 'edit', :id => @playlist.id }, :method => :get, class:"btn btn-outline-light" %>
 <br>
 
 <%# button to add songs to this playlist %>
-<%= button_to "Add Songs",{:controller => :add_songs, :action => 'new', :playlist_id => @playlist.id}, :method => :get %>
+<%= button_to "Add Songs",{:controller => :add_songs, :action => 'new', :playlist_id => @playlist.id}, :method => :get, class:"btn btn-outline-light" %>
 <br>
 
 <%# button to my playlists %>
-<%= button_to "My Playlists", playlists_path, method: :get %>
+<%= button_to "My Playlists", playlists_path, method: :get, class:"btn btn-outline-light" %>
