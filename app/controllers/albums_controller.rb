@@ -6,6 +6,7 @@ class AlbumsController < ApplicationController
 
     def show
         @album = RSpotify::Album.find(params[:id])
+        @add_song = AddSong.new
     end
     
 end

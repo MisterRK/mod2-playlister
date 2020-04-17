@@ -1,22 +1,13 @@
 
 <h1>Add Songs</h1>
 <br>
-
-<%= form_for @add_song do |f| %>
-  <%= f.label 'Playlist:' %>
-  <%= f.collection_select :playlist_id, Playlist.all, :id, :title %><br>
-  <%= f.label 'Song:' %>
-  <%= f.collection_select :track_id, Track.all, :id, :name %><br>
-  <br>
-  <%= f.submit 'Add Song to Playlist' %>
-<% end %>
 <br>
 <%= form_tag add_songs_new_path, method: "get", html: { class: "form" } do %>
   <div class="form-group col-md-4">
-    <label>Find your favorite artist</label><br>
+    <label>Find your favorite artist:</label><br>
     <%= text_field_tag(:artist_name, "", placeholder: "Enter artist name", class: "form-control") %>
   </div>
-  <%= submit_tag "Search", class: "btn btn-outline-secondary" %>
+  <%= submit_tag "Search", class: "btn btn-outline-light" %>
   <% end %>
 
  <% if params[:artist_name].present? %>
@@ -24,19 +15,19 @@
   <% results = RSpotify::Artist.search("#{params[:artist_name]}") %>
 
   <ol class="list-group">
-  <% results.each do |artist|%>
-  <strong>Artist:<br>
-  <%= link_to "#{artist.name}", artist_path(artist.id), class:"artist-header" %></strong>
+  <% results.take(3).each do |artist|%>
+  <h4><strong>Artist:<br>
+  <%= link_to "#{artist.name}", artist_path(artist.id), class:"artist-header" %></strong></h4>
 
   <br>
     <ol>
-      <% artist.albums.uniq.each do |album| %>
-        <li><strong>Album:<br>
-        <%= link_to "#{album.name}", album_path(album.id), class:"artist-header" %></strong></li><br>
+      <% artist.albums.take(3).uniq.each do |album| %>
+        <h6><strong>Album:<br>
+        <%= link_to "#{album.name}", album_path(album.id), class:"artist-header" %></strong></h6><br>
         <ol>
           <% album.tracks.uniq.each do |track| %>
             <li><%= track.name %><%= button_to "Add Song", {:controller => :add_songs,
-            :action => 'create', :track_id => track.id, :album_id => track.album.id, :artist_id => track.artists[0].id, :artist_name => track.artists[0].name, :album_name => track.album.name, :track_name => track.name, :playlist_id => 41 }, :method => :post, class:"btn btn-outline-secondary", type:"button" %>
+            :action => 'create', :track_id => track.id, :album_id => track.album.id, :artist_id => track.artists[0].id, :artist_name => track.artists[0].name, :album_name => track.album.name, :track_name => track.name, :playlist_id => 41 }, :method => :post, class:"btn btn-outline-light", type:"button" %>
         </li><br>
           <% end %>
         </ol>
