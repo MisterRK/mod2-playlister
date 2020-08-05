@@ -2,7 +2,7 @@
 <br>
 <ul>
     <% @playlist.tracks.each do |track| %>
-        <li><%= track.name %></li> 
+        <li><%= track.name %> | <%= track.album.artist.name %></li> 
     <% end %>
 </ul>
 <br>
